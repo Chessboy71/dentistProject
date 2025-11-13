@@ -49,7 +49,7 @@ export default function MultiStepForm({
 }) {
   const methods = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    mode: "onChange",
+    mode: "onSubmit",
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -100,7 +100,9 @@ export default function MultiStepForm({
           name="firstName"
           render={({ field }) => (
             <FormItem className="w-1/2">
-              <FormLabel>First Name</FormLabel>
+              <FormLabel className="text-xs font-semibold text-slate-500">
+                First Name
+              </FormLabel>
               <FormControl>
                 <Input placeholder="John" {...field} />
               </FormControl>
@@ -113,7 +115,9 @@ export default function MultiStepForm({
           name="lastName"
           render={({ field }) => (
             <FormItem className="w-1/2">
-              <FormLabel>Last Name</FormLabel>
+              <FormLabel className="text-xs font-semibold text-slate-500">
+                Last Name
+              </FormLabel>
               <FormControl>
                 <Input placeholder="Doe" {...field} />
               </FormControl>
@@ -129,7 +133,9 @@ export default function MultiStepForm({
           name="telephone"
           render={({ field }) => (
             <FormItem className="w-1/2">
-              <FormLabel>Telephone</FormLabel>
+              <FormLabel className="text-xs font-semibold text-slate-500">
+                Telephone
+              </FormLabel>
               <FormControl>
                 <Input placeholder="+213..." {...field} />
               </FormControl>
@@ -156,7 +162,9 @@ export default function MultiStepForm({
         name="email"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Email</FormLabel>
+            <FormLabel className="text-xs font-semibold text-slate-500">
+              Email
+            </FormLabel>
             <FormControl>
               <Input type="email" placeholder="ex@gmail.com" {...field} />
             </FormControl>
@@ -173,7 +181,9 @@ export default function MultiStepForm({
         name="reason"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Reason</FormLabel>
+            <FormLabel className="text-xs font-semibold text-slate-500">
+              Reason
+            </FormLabel>
             <FormControl>
               <Input placeholder="Enter reason" {...field} />
             </FormControl>
@@ -190,7 +200,9 @@ export default function MultiStepForm({
         name="password"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Password</FormLabel>
+            <FormLabel className="text-xs font-semibold text-slate-500">
+              Password
+            </FormLabel>
             <FormControl>
               <Input type="password" {...field} />
             </FormControl>
@@ -203,7 +215,9 @@ export default function MultiStepForm({
         name="confirmPassword"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Confirm Password</FormLabel>
+            <FormLabel className="text-xs font-semibold text-slate-500">
+              Confirm Password
+            </FormLabel>
             <FormControl>
               <Input type="password" {...field} />
             </FormControl>

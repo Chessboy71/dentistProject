@@ -22,75 +22,48 @@ export default function ClientFormPage() {
       description: "Veuillez fournir les détails du service souhaité",
     },
   ];
+  const navContent = [
+    "Informations personnelles",
+    "Details de service",
+    "Finalisation",
+  ];
 
   const onBack = () => setStep((prev) => Math.max(prev - 1, 0));
 
   return (
-    <div className="flex flex-row ">
+    <div className="flex flex-row h-screen items-center">
       <Image
         src={dentistImage}
         alt="Dentist Office"
         width={2000}
         height={2000}
-        className="h-screen w-1/3 object-cover"
+        className="hidden md:block h-screen w-1/3 object-cover"
       />
-      <div className="w-2/3 flex flex-col justify-center p-8 text-sm ml-24 gap-12">
+      <div className="w-full lg:w-2/3 flex flex-col justify-center p-8 text-sm lg:ml-24 gap-12">
         {/* nav bar */}
         <div className="flex flex-row gap-8 border-b-2 border-slate-200 pb-4 w-full ">
-          <div className="flex flex-row items-center gap-2">
-            <div
-              className={`h-6 w-6 font-bold flex justify-center items-center rounded-xs pt-0.5 ${
-                step === 0
-                  ? "bg-emerald-400 text-white"
-                  : "bg-gray-300 text-white"
-              }`}
-            >
-              1
+          {navContent.map((i, index) => (
+            <div className="flex flex-row items-center gap-2" key={i}>
+              <div
+                className={`h-6 w-6 font-bold flex justify-center items-center rounded-xs pt-0.5 ${
+                  step === index
+                    ? "bg-emerald-400 text-white"
+                    : "bg-gray-300 text-white"
+                }`}
+              >
+                {index + 1}
+              </div>
+              <p
+                className={`text-[0.6rem] lg:text-sm ${
+                  step === index
+                    ? "font-semibold text-slate-900"
+                    : "text-slate-700"
+                }`}
+              >
+                {i}
+              </p>
             </div>
-            <p
-              className={` ${
-                step === 0 ? "font-semibold text-slate-900" : "text-slate-700"
-              }`}
-            >
-              Informations personnelles
-            </p>
-          </div>
-          <div className="flex flex-row items-center gap-2">
-            <div
-              className={`h-6 w-6 font-bold flex justify-center items-center rounded-xs pt-0.5 ${
-                step === 1
-                  ? "bg-emerald-400 text-white"
-                  : "bg-gray-300 text-white"
-              }`}
-            >
-              2
-            </div>
-            <p
-              className={` ${
-                step === 1 ? "font-semibold text-slate-900" : "text-slate-700"
-              }`}
-            >
-              Details de service
-            </p>
-          </div>
-          <div className="flex flex-row items-center gap-2">
-            <div
-              className={`h-6 w-6 font-bold flex justify-center items-center rounded-xs pt-0.5 ${
-                step === 2
-                  ? "bg-emerald-400 text-white"
-                  : "bg-gray-300 text-white"
-              }`}
-            >
-              3
-            </div>
-            <p
-              className={` ${
-                step === 2 ? "font-semibold text-slate-900" : "text-slate-700"
-              }`}
-            >
-              Finalisation
-            </p>
-          </div>
+          ))}
         </div>
 
         {/* Heading */}

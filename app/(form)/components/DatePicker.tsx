@@ -42,7 +42,7 @@ export function DatePickerField({
             <Button
               variant="outline"
               className={cn(
-                "w-full justify-start text-left font-normal",
+                "w-full justify-start text-left font-normal text-[0.65rem] lg:text-sm",
                 !value && "text-muted-foreground"
               )}
             >
