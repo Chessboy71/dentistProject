@@ -63,7 +63,8 @@ export function AppSidebar() {
               <SidebarMenuButton
                 asChild
                 className={`${
-                  path === item.href
+                  path === item.href ||
+                  new RegExp(`^${item.href}/\\d+$`).test(path)
                     ? "bg-emerald-500 text-white hover:bg-emerald-500 hover:text-white"
                     : "hover:text-emerald-500"
                 }   `}

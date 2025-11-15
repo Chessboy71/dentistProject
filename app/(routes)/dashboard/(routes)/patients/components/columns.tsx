@@ -12,6 +12,9 @@ import {
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
+import Link from "next/link";
+import StatusTags from "./StatusTags";
+
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Patient = {
@@ -33,15 +36,23 @@ export const columns: ColumnDef<Patient>[] = [
     header: "Nom complet",
     cell: (row) => {
       return (
-        <span className="font-bold hover:underline cursor-pointer hover:text-emerald-500">
+        <Link
+          className="font-bold hover:underline cursor-pointer hover:text-emerald-500"
+          href={`/dashboard/patients/1`}
+        >
           {row.getValue<string>()}
-        </span>
+        </Link>
       );
     },
   },
   {
     accessorKey: "status",
     header: "Statut",
+    cell: (row) => {
+      return (
+        <StatusTags status={row.getValue<string>() as Patient["status"]} />
+      );
+    },
   },
   {
     accessorKey: "lastConsultation",

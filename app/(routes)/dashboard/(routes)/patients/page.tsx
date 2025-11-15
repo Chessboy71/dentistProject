@@ -1,6 +1,6 @@
 import PageHeader from "@/components/PageHeader";
-import { DataTable } from "./components/patientsTable";
 import { columns, Patient } from "./components/columns";
+import { DataTable } from "./components/PatientsTable";
 
 const PatientsPage = () => {
   const data: Patient[] = [
@@ -175,14 +175,14 @@ const PatientsPage = () => {
   ];
 
   return (
-    <div className="p-6 px-8 space-y-6">
+    <main className="p-6 px-8 space-y-6">
       <PageHeader
         title="Patients"
         description="This is the patients page, they should be displayed here"
       />
 
       <DataTable columns={columns} data={data} />
-    </div>
+    </main>
   );
 };
 
