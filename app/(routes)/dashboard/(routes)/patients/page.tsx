@@ -1,6 +1,6 @@
 import PageHeader from "@/components/PageHeader";
 import { columns, Patient } from "./components/columns";
-import { DataTable } from "./components/PatientsTable";
+import PatientsTable from "./components/PatientsTable";
 
 const PatientsPage = () => {
   const data: Patient[] = [
@@ -181,7 +181,7 @@ const PatientsPage = () => {
         description="This is the patients page, they should be displayed here"
       />
 
-      <DataTable columns={columns} data={data} />
+      <PatientsTable columns={columns} data={data} />
     </main>
   );
 };
