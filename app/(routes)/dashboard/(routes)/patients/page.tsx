@@ -1,6 +1,6 @@
 import PageHeader from "@/components/PageHeader";
 import { columns, Patient } from "./components/columns";
-import PatientsTable from "./components/PatientsTable";
+import { PatientsTable } from "./PatientsTable";
 
 const PatientsPage = () => {
   const data: Patient[] = [

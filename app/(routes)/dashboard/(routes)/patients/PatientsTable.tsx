@@ -25,7 +25,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
-function PatientsTable<TData, TValue>({
+export function PatientsTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -110,5 +110,3 @@ function PatientsTable<TData, TValue>({
     </div>
   );
 }
-
-export default PatientsTable;
