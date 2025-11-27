@@ -6,12 +6,7 @@ import { format } from "date-fns";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import {
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-} from "@/components/ui/form";
+import { FormItem, FormLabel, FormControl } from "@/components/ui/form";
 import {
   Popover,
   PopoverContent,
@@ -28,13 +23,15 @@ interface DatePickerFieldProps {
 export function DatePickerField({
   value,
   onChange,
-  label = "Date de naissance",
+  label,
 }: DatePickerFieldProps) {
   return (
     <FormItem className="flex flex-col w-full">
-      <FormLabel className="text-xs font-semibold text-slate-500">
-        {label}
-      </FormLabel>
+      {label && (
+        <FormLabel className="text-xs font-semibold text-slate-500">
+          {label}
+        </FormLabel>
+      )}
 
       <Popover>
         <PopoverTrigger asChild>
@@ -50,7 +47,7 @@ export function DatePickerField({
               {value ? (
                 format(value, "dd/MM/yyyy")
               ) : (
-                <span>Sélectionnez une date</span>
+                <span className="text-sm">Sélectionnez une date</span>
               )}
             </Button>
           </FormControl>

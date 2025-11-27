@@ -19,22 +19,21 @@ import { Input } from "@/components/ui/input";
 import { DatePickerField } from "./DatePicker";
 import { ChevronLeft } from "lucide-react";
 
+import MultiSelectField from "./MultiSelectField";
+import { Textarea } from "@/components/ui/textarea";
+
 // ✅ Define ONE schema for the whole form
-const formSchema = z
-  .object({
-    firstName: z.string().min(2, "Required"),
-    lastName: z.string().min(2, "Required"),
-    telephone: z.string().min(2, "Required"),
-    dateDeNaissance: z.date({ required_error: "Date required" }),
-    email: z.string().email("Invalid email"),
-    reason: z.string().min(2, "Required"),
-    password: z.string().min(6, "Minimum 6 characters"),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords must match",
-    path: ["confirmPassword"],
-  });
+const formSchema = z.object({
+  firstName: z.string().min(2, "Required"),
+  lastName: z.string().min(2, "Required"),
+  telephone: z.string().min(2, "Required"),
+  dateDeNaissance: z.date("Invalid date"),
+  email: z.email("Invalid email"),
+  service: z.array(z.string()).min(1, "Required"),
+  serviceStatus: z.array(z.string()).min(1, "Required"),
+  disponibilite: z.array(z.string()).min(1, "Required"),
+  message: z.string().optional(),
+});
 
 type FormValues = z.infer<typeof formSchema>;
 
@@ -56,16 +55,17 @@ export default function MultiStepForm({
       telephone: "",
       dateDeNaissance: undefined,
       email: "",
-      reason: "",
-      password: "",
-      confirmPassword: "",
+      service: [],
+      serviceStatus: [],
+      disponibilite: [],
+      message: "",
     },
   });
 
   const fieldsPerStep = [
     ["firstName", "lastName", "telephone", "dateDeNaissance", "email"],
-    ["reason"],
-    ["password", "confirmPassword"],
+    ["service", "serviceStatus", "disponibilite"],
+    ["message"],
   ];
 
   // handler for next (validates only current step)
@@ -90,6 +90,42 @@ export default function MultiStepForm({
     console.log("✅ Submitted Data:", data);
     alert("Form submitted successfully!");
   };
+
+  const serviceOptions = [
+    { value: "consultation", label: "Consultation" },
+    { value: "detartrage", label: "Detartrage" },
+    { value: "extraction", label: "Extraction dentaire" },
+    { value: "soins", label: "Soins" },
+    { value: "blanchiment", label: "Blanchiment" },
+    { value: "goutieres invisibles", label: "Goutières invisibles" },
+    { value: "protheses amovibles", label: "Prothèses amovibles" },
+    { value: "protheses fixes", label: "Prothèses fixes" },
+    { value: "facettes dentaires", label: "Facettes dentaires" },
+    { value: "autres", label: "Autres" },
+  ];
+  const serviceStatusOptions = [
+    { value: "urgent", label: "urgent" },
+    { value: "normal", label: "normal" },
+    { value: "peu urgent", label: "peu urgent" },
+    { value: "rendez-vous de controle", label: "rendez-vous de contrôle" },
+  ];
+
+  const disponibiliteOptions = [
+    { value: "dimanche-matin", label: "Dimanche matin" },
+    { value: "dimanche-soir", label: "Dimanche soir" },
+    { value: "lundi-matin", label: "Lundi matin" },
+    { value: "lundi-soir", label: "Lundi soir" },
+    { value: "mardi-matin", label: "Mardi matin" },
+    { value: "mardi-soir", label: "Mardi soir" },
+    { value: "mercredi-matin", label: "Mercredi matin" },
+    { value: "mercredi-soir", label: "Mercredi soir" },
+    { value: "jeudi-matin", label: "Jeudi matin" },
+    { value: "jeudi-soir", label: "Jeudi soir" },
+    { value: "vendredi-matin", label: "Vendredi matin" },
+    { value: "vendredi-soir", label: "Vendredi soir" },
+    { value: "samedi-matin", label: "Samedi matin" },
+    { value: "samedi-soir", label: "Samedi soir" },
+  ];
 
   const stepFields = [
     // Step 1
@@ -178,17 +214,36 @@ export default function MultiStepForm({
     <>
       <FormField
         control={methods.control}
-        name="reason"
+        name="service"
         render={({ field }) => (
-          <FormItem>
-            <FormLabel className="text-xs font-semibold text-slate-500">
-              Reason
-            </FormLabel>
-            <FormControl>
-              <Input placeholder="Enter reason" {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
+          <MultiSelectField
+            field={field}
+            label="Service"
+            options={serviceOptions}
+          />
+        )}
+      />
+      <FormField
+        control={methods.control}
+        name="serviceStatus"
+        render={({ field }) => (
+          <MultiSelectField
+            field={field}
+            label="Status"
+            options={serviceStatusOptions}
+          />
+        )}
+      />
+      <FormField
+        control={methods.control}
+        name="disponibilite"
+        render={({ field }) => (
+          <MultiSelectField
+            field={field}
+            label="Disponibilité"
+            options={disponibiliteOptions}
+            description="Matin: 10:00 - 16:00, Soir: 17:00 - 21:00"
+          />
         )}
       />
     </>,
@@ -197,29 +252,18 @@ export default function MultiStepForm({
     <>
       <FormField
         control={methods.control}
-        name="password"
+        name="message"
         render={({ field }) => (
           <FormItem>
             <FormLabel className="text-xs font-semibold text-slate-500">
-              Password
+              Message
             </FormLabel>
             <FormControl>
-              <Input type="password" {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        control={methods.control}
-        name="confirmPassword"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className="text-xs font-semibold text-slate-500">
-              Confirm Password
-            </FormLabel>
-            <FormControl>
-              <Input type="password" {...field} />
+              <Textarea
+                placeholder="Your message..."
+                className="min-h-[120px]"
+                {...field}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>

@@ -1,6 +1,7 @@
 import PatientPageHeader from "../components/PatientPageHeader";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PatientOverviewTab from "./component/tabs/OverviewTab";
+import PatientConsultationTab from "./component/tabs/ConsultationTab";
 
 const PatientPage = () => {
   const patient = {
@@ -17,7 +18,7 @@ const PatientPage = () => {
     {
       value: "consultation",
       label: "Consultation",
-      content: <>Consultation</>,
+      content: <PatientConsultationTab />,
     },
     { value: "notes", label: "Notes", content: <>Notes</> },
     { value: "rendezvous", label: "Rendez-vous", content: <>Rendez-vous</> },

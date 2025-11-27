@@ -44,15 +44,15 @@ export function AppSidebar() {
     },
   ];
   return (
-    <Sidebar className="py-2">
-      <SidebarHeader className="font-bold text-emerald-500 ml-auto mr-auto text-xl flex flex-row justify-between w-full px-6">
+    <Sidebar className="">
+      <SidebarHeader className="font-bold text-emerald-500 ml-auto mr-auto text-xl flex flex-row justify-between w-full px-6 mt-2">
         <div>
           <span className="font-normal text-slate-500 text-sm">Dr.</span>{" "}
           Benyahia
         </div>
         <SidebarTrigger
           className={`text-slate-500 ${
-            state === "collapsed" ? "translate-x-14" : ""
+            state === "collapsed" ? "translate-x-14 -translate-y-3" : ""
           }`}
         />
       </SidebarHeader>
